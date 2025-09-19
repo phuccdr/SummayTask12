@@ -14,8 +14,7 @@ fun String?.stringToDate(): Date {
 }
 
 fun String.normalizeUserName(): String {
-    return this.trim()
-        .split(" ").joinToString(separator = " ") {
+    return this.trim().split(" ").joinToString(separator = " ") {
             it.lowercase().replaceFirstChar { char ->
                 char.uppercase()
             }
