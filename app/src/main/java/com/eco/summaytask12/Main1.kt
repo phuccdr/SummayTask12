@@ -3,7 +3,6 @@ package com.eco.summaytask12
 import com.eco.summaytask12.datamockup.DataRepository
 import com.eco.summaytask12.model.AndroidDeveloper
 import com.eco.summaytask12.model.Employee
-import com.eco.summaytask12.model.Founder
 import com.eco.summaytask12.model.Gender
 import com.eco.summaytask12.model.Student
 import kotlinx.coroutines.Dispatchers
@@ -15,15 +14,15 @@ import kotlin.system.measureTimeMillis
 private val dataRepository = DataRepository()
 fun main() {
 
-    val founderGg = Founder(
-        "Larry Page",
-        "26/03/1973",
-        Gender.MALE,
-        "Ha Dong Ha Noi",
-        "0123456789",
-        "phucthecomobile@gmail.com",
-        "Google"
-    )
+//    val founderGg = Founder(
+//        "Larry Page",
+//        "26/03/1973",
+//        Gender.MALE,
+//        "Ha Dong Ha Noi",
+//        "0123456789",
+//        "phucthecomobile@gmail.com",
+//        "Google"
+//    )
     runBlocking {
         val addEmployees = launch(Dispatchers.IO) {
             dataRepository.addEmployees(createListEmployee())
@@ -44,13 +43,13 @@ fun main() {
         println("-----Thông tin nhân viên theo phòng ban  -----")
         println("Nhập tên phòng ban:")
 
-        val department: String? = readlnOrNull()
+        val department: String = readlnOrNull()
         val getEmployeesByDepartment = async(Dispatchers.IO) {
-            department?.let {
-                dataRepository.getEmployeesByDepartment(department.toString())
+            department.let {
+                dataRepository.getEmployeesByDepartment(department)
             }
         }
-        getEmployeesByDepartment.await()?.forEach {
+        getEmployeesByDepartment.await().forEach {
             println(it)
         }
         val getAllAndroidDevelopers = async(Dispatchers.IO) {

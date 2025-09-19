@@ -4,7 +4,6 @@ import com.eco.summaytask12.datamockup.DataRepository
 import com.eco.summaytask12.extension.toGender
 import com.eco.summaytask12.model.AndroidDeveloper
 import com.eco.summaytask12.model.Employee
-import java.util.Stack
 
 private val dataRepository = DataRepository()
 private val listChoose: List<String> = listOf(
@@ -21,7 +20,6 @@ private val listChoose: List<String> = listOf(
 suspend fun main() {
     println("")
     while (true) {
-        val stack = Stack<Int>()
         println(
             """
             Nhập 1 để thực hiện thêm nhân viên
@@ -121,13 +119,11 @@ suspend fun addAndroidDeveloper() {
 
 suspend fun getAndroidDeveloperByLevel() {
     val androidDevelopers = dataRepository.getAllAndroidDevelopers()
-    androidDevelopers.groupBy { it.level }.forEach(
-        action = {
-            //   println(it)
-            println(it.key.toString() + ":")
-            println(it.value)
-        }
-    )
+    androidDevelopers.groupBy { it.level }.forEach(action = {
+        //   println(it)
+        println(it.key.toString() + ":")
+        println(it.value)
+    })
 
 }
 
@@ -155,7 +151,7 @@ suspend fun getAllEmployees() {
 
 fun readlnOrNull(): String {
     while (true) {
-        val string = readLine()
+        val string = kotlin.io.readlnOrNull()
         if (string.isNullOrEmpty()) {
             println("Không được để trống")
             continue
@@ -200,15 +196,7 @@ fun createEmployee(): Employee {
     println("Nhập lương nhân viên: ")
     val salary = readlnOrNull().toDouble()
     return Employee(
-        name,
-        birthOfDate,
-        gender.toGender(),
-        address,
-        phone,
-        email,
-        position,
-        department,
-        salary
+        name, birthOfDate, gender.toGender(), address, phone, email, position, department, salary
     )
 
 }

@@ -14,14 +14,16 @@ fun String?.stringToDate(): Date {
 }
 
 fun String.normalizeUserName(): String {
-    return this.trim().split(" ").map {
-        it.lowercase().replaceFirstChar {
-            it.uppercase()
+    return this.trim()
+        .split(" ").joinToString(separator = " ") {
+            it.lowercase().replaceFirstChar { char ->
+                char.uppercase()
+            }
         }
-    }.joinToString(separator = " ")
 }
-fun String.toGender(): Gender = when (this.toInt()) {
-    0 -> Gender.MALE
-    1 -> Gender.FEMALE
+
+fun String.toGender(): Gender = when {
+    this.contains("Nam", ignoreCase = true) -> Gender.MALE
+    this.contains("Nu", ignoreCase = true) -> Gender.FEMALE
     else -> throw IllegalArgumentException("Invalid gender value: $this")
 }
