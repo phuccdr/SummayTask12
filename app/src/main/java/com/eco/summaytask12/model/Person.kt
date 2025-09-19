@@ -2,6 +2,7 @@ package com.eco.summaytask12.model
 
 import com.eco.summaytask12.extension.normalizeUserName
 import com.eco.summaytask12.extension.stringToDate
+import com.eco.summaytask12.extension.toGender
 import java.util.Calendar
 import java.util.Date
 
@@ -21,6 +22,15 @@ abstract class Person(
         phone: String,
         email: String
     ) : this(name.normalizeUserName(), birthOfDate.stringToDate(), gender, address, phone, email)
+
+    constructor(
+        name: String,
+        birthOfDate: String,
+        gender: String,
+        address: String,
+        phone: String,
+        email: String
+    ) : this(name.normalizeUserName(), birthOfDate.stringToDate(), gender.toGender(), address, phone, email)
 
     val contactInfo: String by lazy {
         """

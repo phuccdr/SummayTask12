@@ -36,4 +36,7 @@ class AndroidDeveloper(
         skills.add("Collections")
     }
 
+    override fun toString(): String {
+        return "AndroidDeveloper(name='$name', birthOfDate='$birthOfDate', gender=$gender, address='$address', phone='$phone', email='$email', position='$position', department='$department', experience=$experience, skills=$skills)"
+    }
 }

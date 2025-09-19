@@ -10,16 +10,14 @@ data class Company(
     val description: String? = "Xin chao moi nguoi",
     val foundedYear: Int = 2020,
 ) {
-    val totalEmployees: Int by lazy {
-        employees.size
-    }
+    val totalEmployees: Int get() = employees.size
 
     companion object {
         fun createStartup(
             name: String,
             address: String,
             founder: Founder,
-            ): Company {
+        ): Company {
             return Company(
                 name = name,
                 address = address,

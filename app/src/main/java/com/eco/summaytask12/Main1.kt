@@ -1,7 +1,7 @@
 package com.eco.summaytask12
 
 import com.eco.summaytask12.datamockup.DataRepository
-import com.eco.summaytask12.model.Company
+import com.eco.summaytask12.model.AndroidDeveloper
 import com.eco.summaytask12.model.Employee
 import com.eco.summaytask12.model.Founder
 import com.eco.summaytask12.model.Gender
@@ -24,25 +24,33 @@ fun main() {
         "phucthecomobile@gmail.com",
         "Google"
     )
-    val google = Company.createStartup(
-        "Google",
-        "Ha Dong Ha Noi",
-        founderGg
-    )
     runBlocking {
         val addEmployees = launch(Dispatchers.IO) {
             dataRepository.addEmployees(createListEmployee())
         }
+        val addAndroidDevelopers = launch(Dispatchers.IO) {
+            dataRepository.addEmployees(createListAndroidDeveloper())
+        }
         addEmployees.join()
+        addAndroidDevelopers.join()
 
+
+        println("-----Thông tin tất cả nhân viên -----")
         val getAllEmployees = async(Dispatchers.IO) { dataRepository.getAllEmployees() }
         getAllEmployees.await().forEach {
             println(it)
         }
+
+        println("-----Thông tin nhân viên theo phòng ban  -----")
+        println("Nhập tên phòng ban:")
+
+        val department: String? = readlnOrNull()
         val getEmployeesByDepartment = async(Dispatchers.IO) {
-            dataRepository.getEmployeesByDepartment("R&D")
+            department?.let {
+                dataRepository.getEmployeesByDepartment(department.toString())
+            }
         }
-        getEmployeesByDepartment.await().forEach {
+        getEmployeesByDepartment.await()?.forEach {
             println(it)
         }
         val getAllAndroidDevelopers = async(Dispatchers.IO) {
@@ -127,7 +135,7 @@ fun checkPerformanceAddStudent() {
 
 fun createListStudents(): List<Student> {
     val students = mutableListOf<Student>()
-    for (i in 0..10000000) {
+    for (i in 0..100000) {
         students.add(
             Student(
                 "Student $i",
@@ -142,6 +150,28 @@ fun createListStudents(): List<Student> {
         )
     }
     return students
+}
+
+
+fun createListAndroidDeveloper(): List<AndroidDeveloper> {
+    val androidDevelopers = mutableListOf<AndroidDeveloper>()
+    for (i in 0..1000) {
+        androidDevelopers.add(
+            AndroidDeveloper(
+                "AndroidDeveloper $i",
+                "18/09/2025",
+                Gender.MALE,
+                "Ha Noi",
+                "0123456789",
+                "thaiphuca1pdl@gmail.com",
+                "Developer",
+                "R&D",
+                1.0,
+                hashSetOf("Kotlin", "Android")
+            )
+        )
+    }
+    return androidDevelopers
 }
 
 fun createListEmployee(): List<Employee> {

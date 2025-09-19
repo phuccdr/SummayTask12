@@ -9,7 +9,32 @@ import kotlinx.coroutines.delay
 
 class DataRepository {
 
-    private val mockAndroidDevelopers: MutableList<AndroidDeveloper> = mutableListOf(
+    private val mockAndroidDevelopers: List<AndroidDeveloper> get() {
+       return mockEmployees.filterIsInstance<AndroidDeveloper>()
+    }
+    private val mockEmployees: MutableList<Employee> = mutableListOf(
+        Employee(
+            "Hoa Nguyen",
+            "03/03/1993",
+            Gender.FEMALE,
+            "Thanh Xuan, Ha Noi",
+            "0345678901",
+            "hoa.nguyen@ecomobile.com",
+            "HR Manager",
+            "Human Resources",
+            15_000_000.0
+        ),
+        Employee(
+            "Nam Tran",
+            "04/04/1994",
+            Gender.MALE,
+            "Dong Da, Ha Noi",
+            "0456789012",
+            "nam.tran@ecomobile.com",
+            "Project Manager",
+            "R&D",
+            25000000.0
+        ),
         AndroidDeveloper(
             "Phuc Thai", "20/09/2004", Gender.MALE, "Ha Dong Ha Noi",
             "0345527959", "phucth.ecomobile@gmail.com",
@@ -30,30 +55,11 @@ class DataRepository {
         )
     )
 
-    private val mockEmployees: MutableList<Employee> =
-        mutableListOf(
-            Employee(
-                "Hoa Nguyen", "03/03/1993", Gender.FEMALE, "Thanh Xuan Ha Noi",
-                "0345678901", "hoa.nguyen@ecomobile.com",
-                "HR Manager", "Human Resources", 15000000.0
-            ),
-            Employee(
-                "Nam Tran", "04/04/1994", Gender.MALE, "Dong Da Ha Noi",
-                "0456789012", "nam.tran@ecomobile.com",
-                "Project Manager", "R&D", 25000000.0
-            )
-        ).apply {
-            addAll(mockAndroidDevelopers)
-        }
-
-
     suspend fun getAllAndroidDevelopers(): List<AndroidDeveloper> {
         println("Fetching all Android Developers.")
         delay(1500)
         println("Successfully fetched ${mockAndroidDevelopers.size} Android Developers")
-        return mockEmployees.filterIsInstance<AndroidDeveloper>().map { employee ->
-            employee
-        }
+        return mockAndroidDevelopers
     }
 
     suspend fun getAllEmployees(): List<Employee> {
@@ -90,7 +96,9 @@ class DataRepository {
 
     suspend fun addEmployees(employees: List<Employee>) {
         delay(1000)
+//        mockAndroidDevelopers.addAll(employees.filterIsInstance<AndroidDeveloper>())
         mockEmployees.addAll(employees)
+        println(employees[0])
         println("Successfully added ${employees.size} employees")
     }
 
@@ -102,6 +110,10 @@ class DataRepository {
 
     fun getAllInternAndroidDevelopers(): List<AndroidDeveloper> {
         return mockAndroidDevelopers.filter { it.level == DeveloperLevel.INTERN }
+    }
+
+    fun searchEmployeeByName(name: String): Employee? {
+        return mockEmployees.find { it.name == name }
     }
 
     private var mockStudents1: MutableSet<Student> = mutableSetOf(
@@ -117,8 +129,6 @@ class DataRepository {
             3.2f,
         )
     )
-
-    val hashSet = HashSet<Student>(64,0.5f)
 
     private var mockStudents2: HashSet<Student> = hashSetOf(
         Student(

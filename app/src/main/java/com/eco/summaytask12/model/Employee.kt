@@ -1,5 +1,7 @@
 package com.eco.summaytask12.model
 
+import com.eco.summaytask12.extension.toGender
+
 open class Employee(
     name: String,
     birthOfDate: String,
