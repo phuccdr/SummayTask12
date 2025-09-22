@@ -1,4 +1,4 @@
-package com.eco.summaytask12.model
+package com.eco.summaytask12.data.model
 
 import java.util.Calendar
 
@@ -6,9 +6,9 @@ data class Company(
     val name: String,
     val address: String,
     val founder: Founder,
-    val employees: MutableList<Employee>,
-    val description: String? = "Xin chao moi nguoi",
-    val foundedYear: Int = 2020,
+    private val employees: MutableList<Employee>,
+    private val description: String? = "Xin chao moi nguoi",
+    private val foundedYear: Int = 2020,
 ) {
     val totalEmployees: Int get() = employees.size
 
@@ -26,5 +26,14 @@ data class Company(
                 foundedYear = Calendar.getInstance().get(Calendar.YEAR)
             )
         }
+    }
+
+    override fun toString(): String {
+        return "Company(name='$name', address='$address', founder=$founder, employees=$employees, description=$description, foundedYear=$foundedYear), totalEmployees=$totalEmployees"
+    }
+
+
+    fun setEmployees(employees: List<Employee>) {
+        this.employees.addAll(employees)
     }
 }

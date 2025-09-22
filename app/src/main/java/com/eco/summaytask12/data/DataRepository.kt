@@ -1,10 +1,10 @@
-package com.eco.summaytask12.datamockup
+package com.eco.summaytask12.data
 
-import com.eco.summaytask12.model.AndroidDeveloper
-import com.eco.summaytask12.model.DeveloperLevel
-import com.eco.summaytask12.model.Employee
-import com.eco.summaytask12.model.Gender
-import com.eco.summaytask12.model.Student
+import com.eco.summaytask12.data.model.AndroidDeveloper
+import com.eco.summaytask12.data.model.DeveloperLevel
+import com.eco.summaytask12.data.model.Employee
+import com.eco.summaytask12.data.model.Gender
+import com.eco.summaytask12.data.model.Student
 import kotlinx.coroutines.delay
 
 class DataRepository {
@@ -12,6 +12,7 @@ class DataRepository {
     private val mockAndroidDevelopers: List<AndroidDeveloper> get() {
        return mockEmployees.filterIsInstance<AndroidDeveloper>()
     }
+
     private val mockEmployees: MutableList<Employee> = mutableListOf(
         Employee(
             "Hoa Nguyen",

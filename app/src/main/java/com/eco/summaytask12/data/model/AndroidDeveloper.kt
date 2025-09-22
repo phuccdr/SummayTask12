@@ -1,4 +1,4 @@
-package com.eco.summaytask12.model
+package com.eco.summaytask12.data.model
 
 class AndroidDeveloper(
     name: String,

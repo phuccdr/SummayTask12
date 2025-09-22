@@ -1,7 +1,7 @@
 package com.eco.summaytask12
 
-import com.eco.summaytask12.model.Gender
-import com.eco.summaytask12.model.Student
+import com.eco.summaytask12.data.model.Gender
+import com.eco.summaytask12.data.model.Student
 import kotlinx.coroutines.async
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch

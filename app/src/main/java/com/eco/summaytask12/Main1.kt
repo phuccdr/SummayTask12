@@ -1,10 +1,10 @@
 package com.eco.summaytask12
 
-import com.eco.summaytask12.datamockup.DataRepository
-import com.eco.summaytask12.model.AndroidDeveloper
-import com.eco.summaytask12.model.Employee
-import com.eco.summaytask12.model.Gender
-import com.eco.summaytask12.model.Student
+import com.eco.summaytask12.data.DataRepository
+import com.eco.summaytask12.data.model.AndroidDeveloper
+import com.eco.summaytask12.data.model.Employee
+import com.eco.summaytask12.data.model.Gender
+import com.eco.summaytask12.data.model.Student
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch

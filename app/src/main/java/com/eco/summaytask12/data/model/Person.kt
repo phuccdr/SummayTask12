@@ -1,4 +1,4 @@
-package com.eco.summaytask12.model
+package com.eco.summaytask12.data.model
 
 import com.eco.summaytask12.extension.normalizeUserName
 import com.eco.summaytask12.extension.stringToDate
