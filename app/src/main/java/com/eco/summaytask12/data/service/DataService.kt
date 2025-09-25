@@ -3,7 +3,7 @@ package com.eco.summaytask12.data.service
 import com.eco.summaytask12.data.repository.EmployeeRepository
 import com.eco.summaytask12.data.repository.StudentRepository
 import com.eco.summaytask12.data.model.employee.Employee
-import com.eco.summaytask12.data.model.employee.android_developer.AndroidDeveloper
+import com.eco.summaytask12.data.model.employee.androiddeveloper.AndroidDeveloper
 import com.eco.summaytask12.data.model.employee.manger.Manager
 import com.eco.summaytask12.data.model.student.Student
 

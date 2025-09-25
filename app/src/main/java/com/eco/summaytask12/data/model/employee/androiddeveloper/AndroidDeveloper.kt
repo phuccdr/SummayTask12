@@ -1,4 +1,4 @@
-package com.eco.summaytask12.data.model.employee.android_developer
+package com.eco.summaytask12.data.model.employee.androiddeveloper
 
 import com.eco.summaytask12.data.model.department.Department
 import com.eco.summaytask12.data.model.employee.Employee

@@ -3,7 +3,7 @@ package com.eco.summaytask12
 import com.eco.summaytask12.data.model.company.Company
 import com.eco.summaytask12.data.service.DataService
 import com.eco.summaytask12.extension.toGender
-import com.eco.summaytask12.data.model.employee.android_developer.AndroidDeveloper
+import com.eco.summaytask12.data.model.employee.androiddeveloper.AndroidDeveloper
 import com.eco.summaytask12.data.model.employee.Employee
 import com.eco.summaytask12.data.model.student.Student
 import com.eco.summaytask12.data.model.founder.Founder

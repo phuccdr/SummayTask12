@@ -1,6 +1,6 @@
 package com.eco.summaytask12.data.model.student
 
-import com.eco.summaytask12.data.model.employee.android_developer.KotlinExercise
+import com.eco.summaytask12.data.model.employee.androiddeveloper.KotlinExercise
 import com.eco.summaytask12.data.model.person.Gender
 import com.eco.summaytask12.data.model.person.Person
 

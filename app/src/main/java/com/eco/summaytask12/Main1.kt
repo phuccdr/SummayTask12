@@ -2,7 +2,7 @@ package com.eco.summaytask12
 
 import com.eco.summaytask12.data.model.department.Department
 import com.eco.summaytask12.data.service.DataService
-import com.eco.summaytask12.data.model.employee.android_developer.AndroidDeveloper
+import com.eco.summaytask12.data.model.employee.androiddeveloper.AndroidDeveloper
 import com.eco.summaytask12.data.model.employee.Employee
 import com.eco.summaytask12.data.model.person.Gender
 import com.eco.summaytask12.data.model.student.Student
