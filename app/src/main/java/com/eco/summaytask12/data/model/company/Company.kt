@@ -1,5 +1,7 @@
-package com.eco.summaytask12.data.model
+package com.eco.summaytask12.data.model.company
 
+import com.eco.summaytask12.data.model.employee.Employee
+import com.eco.summaytask12.data.model.founder.Founder
 import java.util.Calendar
 
 data class Company(
@@ -33,7 +35,7 @@ data class Company(
     }
 
 
-    fun setEmployees(employees: List<Employee>) {
+    fun addEmployees(employees: List<Employee>) {
         this.employees.addAll(employees)
     }
 }

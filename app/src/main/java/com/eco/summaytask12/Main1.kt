@@ -1,17 +1,18 @@
 package com.eco.summaytask12
 
-import com.eco.summaytask12.data.DataRepository
-import com.eco.summaytask12.data.model.AndroidDeveloper
-import com.eco.summaytask12.data.model.Employee
-import com.eco.summaytask12.data.model.Gender
-import com.eco.summaytask12.data.model.Student
+import com.eco.summaytask12.data.model.department.Department
+import com.eco.summaytask12.data.service.DataService
+import com.eco.summaytask12.data.model.employee.android_developer.AndroidDeveloper
+import com.eco.summaytask12.data.model.employee.Employee
+import com.eco.summaytask12.data.model.person.Gender
+import com.eco.summaytask12.data.model.student.Student
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import kotlin.system.measureTimeMillis
 
-private val dataRepository = DataRepository()
+private val dataService = DataService()
 fun main() {
 
 //    val founderGg = Founder(
@@ -24,60 +25,51 @@ fun main() {
 //        "Google"
 //    )
     runBlocking {
-        val addEmployees = launch(Dispatchers.IO) {
-            dataRepository.addEmployees(createListEmployee())
+        try {
+            val addEmployees = launch(Dispatchers.IO) {
+                dataService.addEmployees(createListEmployee())
+            }
+            val addAndroidDevelopers = launch(Dispatchers.IO) {
+                dataService.addEmployees(createListAndroidDeveloper())
+            }
+            addEmployees.join()
+            addAndroidDevelopers.join()
+        } catch (e: Exception) {
+            println("Error adding employees: ${e.message}")
+            return@runBlocking
         }
-        val addAndroidDevelopers = launch(Dispatchers.IO) {
-            dataRepository.addEmployees(createListAndroidDeveloper())
-        }
-        addEmployees.join()
-        addAndroidDevelopers.join()
 
 
+        // Fetch multiple data sources concurrently
+        println("-----Fetching all data concurrently-----")
+        val getAllEmployees = async(Dispatchers.IO) { dataService.getAllEmployees() }
+        val getAllAndroidDevelopers = async(Dispatchers.IO) { dataService.getAllAndroidDevelopers() }
+        val getStatistics = async(Dispatchers.IO) { dataService.getStatistics() }
+        
         println("-----Thông tin tất cả nhân viên -----")
-        val getAllEmployees = async(Dispatchers.IO) { dataRepository.getAllEmployees() }
         getAllEmployees.await().forEach {
             println(it)
         }
-
-        println("-----Thông tin nhân viên theo phòng ban  -----")
-        println("Nhập tên phòng ban:")
-
-        val department: String = readlnOrNull()
-        val getEmployeesByDepartment = async(Dispatchers.IO) {
-            department.let {
-                dataRepository.getEmployeesByDepartment(department)
-            }
-        }
-        getEmployeesByDepartment.await().forEach {
-            println(it)
-        }
-        val getAllAndroidDevelopers = async(Dispatchers.IO) {
-            dataRepository.getAllAndroidDevelopers()
-        }
+        
+        println("-----Android Developers-----")
         getAllAndroidDevelopers.await().forEach {
             println(it)
         }
 
-        val getStatistics = async(Dispatchers.IO) { dataRepository.getStatistics() }
+        println("-----Statistics-----")
         println(getStatistics.await())
 
         val getContactInfo = async(Dispatchers.IO) {
-            dataRepository.getAllEmployees()
+            dataService.getAllEmployees()
         }
         getContactInfo.await().forEach {
             println(it.contactInfo)
             println("---------------------------------------------------------")
         }
 
-        println("Employee by position: Developer")
-        val employeesByPosition = dataRepository.getEmployeesByPosition("Developer")
-        employeesByPosition.forEach {
-            println(it)
-        }
 
         println("Intern Android Developers:")
-        val internAndroidDevelopers = dataRepository.getAllInternAndroidDevelopers()
+        val internAndroidDevelopers = dataService.getAllInternAndroidDevelopers()
         internAndroidDevelopers.forEach {
             println(it)
         }
@@ -91,22 +83,22 @@ fun checkPerformanceAddStudent() {
     val students = createListStudents()
 
     val timeAddStudent1 = measureTimeMillis {
-        dataRepository.addStudent1(students)
+        dataService.addStudent1(students)
     }
     println("TimeAddStudent1:$timeAddStudent1")
 
     val timeAddStudent2 = measureTimeMillis {
-        dataRepository.addStudent2(students)
+        dataService.addStudent2(students)
     }
     println("TimeAddStudent2:$timeAddStudent2")
 
     val timeSearchStudent1 = measureTimeMillis {
-        println(dataRepository.searchStudent1("Thai Phuc").toString())
+        println(dataService.searchStudent1("Thai Phuc").toString())
     }
     println("TimeSearchStudent1:$timeSearchStudent1")
 
     val timeSearchStudent2 = measureTimeMillis {
-        println(dataRepository.searchStudent2("Thai Phuc").toString())
+        println(dataService.searchStudent2("Thai Phuc").toString())
     }
     println("TimeSearchStudent2:$timeSearchStudent2")
 
@@ -122,19 +114,19 @@ fun checkPerformanceAddStudent() {
         3.2f,
     )
     val timeCheckContainStudent1 = measureTimeMillis {
-        println(dataRepository.checkContainStudent1(studentCheckContain))
+        println(dataService.checkContainStudent1(studentCheckContain))
     }
     println("TimeCheckContainStudent1:$timeCheckContainStudent1")
 
     val timeCheckContainStudent2 = measureTimeMillis {
-        println(dataRepository.checkContainStudent2(studentCheckContain))
+        println(dataService.checkContainStudent2(studentCheckContain))
     }
     println("TimeCheckContainStudent2:$timeCheckContainStudent2")
 }
 
 fun createListStudents(): List<Student> {
     val students = mutableListOf<Student>()
-    for (i in 0..100000) {
+    for (i in 0..1000) {
         students.add(
             Student(
                 "Student $i",
@@ -163,9 +155,8 @@ fun createListAndroidDeveloper(): List<AndroidDeveloper> {
                 "Ha Noi",
                 "0123456789",
                 "thaiphuca1pdl@gmail.com",
-                "Developer",
-                "R&D",
-                1.0,
+                Department.Outsource,
+                10.0,
                 hashSetOf("Kotlin", "Android")
             )
         )
@@ -184,9 +175,7 @@ fun createListEmployee(): List<Employee> {
                 "Ha Noi",
                 "0123456789",
                 "thaiphuca1pdl@gmail.com",
-                "Developer",
-                "R&D",
-                10000000.0
+                Department.HumanResources
             )
         )
     }

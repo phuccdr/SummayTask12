@@ -1,25 +1,30 @@
 package com.eco.summaytask12
 
-import com.eco.summaytask12.data.DataRepository
+import com.eco.summaytask12.data.model.company.Company
+import com.eco.summaytask12.data.service.DataService
 import com.eco.summaytask12.extension.toGender
-import com.eco.summaytask12.data.model.AndroidDeveloper
-import com.eco.summaytask12.data.model.Employee
-import com.eco.summaytask12.data.model.Student
-import com.eco.summaytask12.data.model.Company
-import com.eco.summaytask12.data.model.Founder
+import com.eco.summaytask12.data.model.employee.android_developer.AndroidDeveloper
+import com.eco.summaytask12.data.model.employee.Employee
+import com.eco.summaytask12.data.model.student.Student
+import com.eco.summaytask12.data.model.founder.Founder
+import com.eco.summaytask12.utils.readlnOrNullDate
+import com.eco.summaytask12.utils.readlnOrNullDepartment
+import com.eco.summaytask12.utils.readlnOrNullFloat
+import com.eco.summaytask12.utils.readlnOrNullGender
 
-private val dataRepository = DataRepository()
+private val dataService = DataService()
 private val listChoose: List<String> = listOf(
     "Quay lai",
     "Thêm nhân viên",
     "Tìm kiem nhân viên theo tên",
     "In ra danh sach thông tin nhân viên",
-    "In ra danh sach nhân viên theo phòng ban",
     "In ra thống kê báo cáo nhân viên",
     "In ra danh sách thông tin Android dev theo level",
     "Thêm Android developer.",
     "Thêm sinh viên và ",
-    "Khởi tạo công ty startup"
+    "Khởi tạo công ty startup",
+    "Danh sach Manager",
+    "Bao cao cua Manager"
 )
 
 suspend fun main() {
@@ -30,12 +35,13 @@ suspend fun main() {
             Nhập 1 để thực hiện thêm nhân viên
             Nhập 2 để thực hiện tìm kiếm nhân viên theo tên
             Nhập 3 để thực hiện in ra danh sách thông tin nhân viên
-            Nhập 4 để thực hiện in ra danh sách nhân viên theo phòng ban
-            Nhập 5 để thực hiện in ra thống kê báo cáo nhân viên
-            Nhập 6 để thực hiện in ra danh sách thông tin Android dev theo level
-            Nhập 7 để thực hiện thêm Android developer.
-            Nhập 8 để thực hiện tạo sinh viên và them sinh vien vao danh sach
-            Nhập 9 để thực hiện tạo company và them company vao co so du lieu
+            Nhập 4 để thực hiện in ra thống kê báo cáo nhân viên
+            Nhập 5 để thực hiện in ra danh sách thông tin Android dev theo level
+            Nhập 6 để thực hiện thêm Android developer.
+            Nhập 7 để thực hiện tạo sinh viên và them sinh vien vao danh sach
+            Nhập 8 để thực hiện tạo company và them company vao co so du lieu
+            Nhập 9 để thực hiện in ra danh sach manager
+            Nhập 10 để thực hiện in ra bao cao cua manager
             Nhập 0 để quay lại
         """.trimIndent()
         )
@@ -56,26 +62,29 @@ suspend fun main() {
             }
 
             4 -> {
-                getEmployeesByDepartment()
-            }
-
-            5 -> {
                 getStatistics()
             }
 
-            6 -> {
+            5 -> {
                 getAndroidDeveloperByLevel()
             }
 
-            7 -> {
+            6 -> {
                 addAndroidDeveloper()
             }
 
-            8 -> {
+            7 -> {
                 addStudent()
             }
-            9 -> {
+            8 -> {
                 createCompanyStartup()
+            }
+            9 -> {
+                getAllManagers()
+            }
+
+            10 ->{
+                getStatisticsManagerByProjectCompleted()
             }
 
             0 -> {
@@ -83,12 +92,8 @@ suspend fun main() {
                 break
             }
         }
-
     }
-
 }
-
-
 
 
 /**
@@ -96,14 +101,14 @@ suspend fun main() {
  */
 suspend fun addEmployee() {
     val newEmployee: Employee = createEmployee()
-    dataRepository.addEmployees(listOf(newEmployee))
+    dataService.addEmployees(listOf(newEmployee))
 }
 
 fun createEmployee(): Employee {
     println("Nhập tên nhân viên:")
     val name = readlnOrNull()
     println("Nhập ngày sinh nhân viên (dd/MM/yyyy): ")
-    val birthOfDate = readlnOrNull()
+    val birthOfDate = readlnOrNullDate()
     println("Nhập giới tính nhân viên (Nam/Nu): ")
     val gender = readlnOrNull()
     println("Nhập địa chỉ nhân viên: ")
@@ -115,11 +120,10 @@ fun createEmployee(): Employee {
     println("Nhập chức vụ nhân viên: ")
     val position = readlnOrNull()
     println("Nhập phòng ban nhân viên: ")
-    val department = readlnOrNull()
+    val department = readlnOrNullDepartment()
     println("Nhập lương nhân viên: ")
-    val salary = readlnOrNullDouble()
     return Employee(
-        name, birthOfDate, gender.toGender(), address, phone, email, position, department, salary
+        name, birthOfDate, gender.toGender(), address, phone, email, department
     )
 
 }
@@ -129,7 +133,7 @@ fun createEmployee(): Employee {
  */
 fun searchEmployeeByName() {
     val name = readlnOrNull()
-    val employee = dataRepository.searchEmployeeByName(name)
+    val employee = dataService.searchEmployeeByName(name)
     employee?.let {
         println(it)
         return
@@ -141,7 +145,7 @@ fun searchEmployeeByName() {
  * 3
  */
 suspend fun getAllEmployees() {
-    val allEmployee = dataRepository.getAllEmployees()
+    val allEmployee = dataService.getAllEmployees()
     allEmployee.forEach {
         println(it)
     }
@@ -150,28 +154,17 @@ suspend fun getAllEmployees() {
 /**
  * 4
  */
-suspend fun getEmployeesByDepartment() {
-    println("Nhập tên phòng ban:")
-    val department = readlnOrNull()
-    val getEmployeesByDepartment = dataRepository.getEmployeesByDepartment(department)
-    getEmployeesByDepartment.forEach {
-        println(it)
-    }
+
+suspend fun getStatistics() {
+    val statistics = dataService.getStatistics()
+    println(statistics)
 }
 
 /**
  * 5
  */
-suspend fun getStatistics() {
-    val statistics = dataRepository.getStatistics()
-    println(statistics)
-}
-
-/**
- * 6
- */
 suspend fun getAndroidDeveloperByLevel() {
-    val androidDevelopers = dataRepository.getAllAndroidDevelopers()
+    val androidDevelopers = dataService.getAllAndroidDevelopers()
     androidDevelopers.groupBy { it.level }.forEach(action = {
         //   println(it)
         println(it.key.toString() + ":")
@@ -181,11 +174,11 @@ suspend fun getAndroidDeveloperByLevel() {
 }
 
 /**
- * 7
+ * 6
  */
 suspend fun addAndroidDeveloper() {
     val newAndroidDeveloper = createAndroidDeveloper()
-    dataRepository.addEmployees(listOf(newAndroidDeveloper))
+    dataService.addEmployees(listOf(newAndroidDeveloper))
 }
 
 fun createAndroidDeveloper(): AndroidDeveloper {
@@ -193,7 +186,7 @@ fun createAndroidDeveloper(): AndroidDeveloper {
     println("Nhap ten: ")
     val name = readlnOrNull()
     println("Nhap ngay sinh: ")
-    val birthOfDate = readlnOrNull()
+    val birthOfDate = readlnOrNullDate()
     println("Nhap gioi tinh: ")
     val gender = readlnOrNull()
     println("Nhap dia chi: ")
@@ -202,10 +195,8 @@ fun createAndroidDeveloper(): AndroidDeveloper {
     val phone = readlnOrNull()
     println("Nhap email: ")
     val email = readlnOrNull()
-    println("Nhap chuc vu: ")
-    val position = readlnOrNull()
     println("Nhap phong ban: ")
-    val department = readlnOrNull()
+    val department = readlnOrNullDepartment()
     println("Nhap kinh nghiem: ")
     val experience = readlnOrNull()
     println("Nhap skills: ")
@@ -217,7 +208,6 @@ fun createAndroidDeveloper(): AndroidDeveloper {
         address,
         phone,
         email,
-        position,
         department,
         experience.toDouble(),
         skills.split(",").toHashSet()
@@ -226,18 +216,18 @@ fun createAndroidDeveloper(): AndroidDeveloper {
 }
 
 /**
- * 8
+ * 7
  */
 fun addStudent() {
     val student = createStudent()
     student.studyKotlin()
     student.study("Coroutine")
-    dataRepository.addStudent1(listOf(student))
+    dataService.addStudent1(listOf(student))
     println("Them thanh cong: $student")
 }
 
 /**
- * 9
+ * 8
  */
  suspend fun createCompanyStartup() {
     // Tạo founder cho startup
@@ -246,14 +236,33 @@ fun addStudent() {
     val companyName = readlnOrNull()
     println("Nhập địa chỉ công ty:")
     val companyAddress = readlnOrNull()
-    val employees = dataRepository.getAllEmployees()
+    val employees = dataService.getAllEmployees()
     val startup = Company.createStartup(companyName, companyAddress, founder)
-    startup.setEmployees(employees)
+    startup.addEmployees(employees)
     println("Thông tin công ty startup:")
     println(startup)
     founder.greet()
 }
 
+
+suspend fun getStatisticsManagerByProjectCompleted() {
+    val manager = dataService.getAllManagers()
+    manager.groupBy{
+        it.projects.count{project ->
+            project.isCompleted
+        }
+    }.forEach{
+        println(it)
+    }
+}
+
+
+suspend fun getAllManagers() {
+    val managers = dataService.getAllManagers()
+    managers.forEach {
+        println(it)
+    }
+}
 
 /**
  * Yeu cau nhap du lieu khong duoc de trong
@@ -269,42 +278,6 @@ fun readlnOrNull(): String {
     }
 }
 
-/**
- * Yeu cau nhap du lieu la so Double
- */
-fun readlnOrNullDouble(): Double {
-   while(true){
-       val string = readlnOrNull()
-       if(string.isEmpty()){
-           println("Không được để trống")
-           continue
-       }else if(string.toDoubleOrNull() == null){
-           println("Phải là số nguyên")
-           continue
-       }else{
-           return string.toDouble()
-       }
-   }
-}
-
-/**
- * Yeu cau nhap du lieu la so Float
- */
-fun readlnOrNullFloat(): Float {
-    while(true){
-        val string = readlnOrNull()
-        if(string.isEmpty()){
-            println("Không được để trống")
-            continue
-        }else if(string.toFloatOrNull() == null){
-            println("Phải là số thực")
-            continue
-        }else{
-            return string.toFloat()
-        }
-    }
-}
-
 
 
 fun createStudent(): Student {
@@ -314,7 +287,7 @@ fun createStudent(): Student {
     println("Nhập ngày sinh sinh viên (dd/MM/yyyy):")
     val birthOfDate = readlnOrNull()
     println("Nhập giới tính sinh viên (Nam/Nu):")
-    val gender = readlnOrNull()
+    val gender = readlnOrNullGender()
     println("Nhập địa chỉ sinh viên:")
     val address = readlnOrNull()
     println("Nhập số điện thoại sinh viên:")
@@ -332,7 +305,7 @@ fun createStudent(): Student {
     val skills = skillsInput.split(",").map { it.trim() }.toHashSet()
     
     return Student(
-        name, birthOfDate, gender.toGender(), address, phone, email,
+        name, birthOfDate, gender, address, phone, email,
         university, major, gpa, skills
     )
 }
@@ -342,9 +315,9 @@ fun createFounder(): Founder {
     println("Nhập tên founder:")
     val name = readlnOrNull()
     println("Nhập ngày sinh founder (dd/MM/yyyy):")
-    val birthOfDate = readlnOrNull()
+    val birthOfDate = readlnOrNullDate()
     println("Nhập giới tính founder (Nam/Nu):")
-    val gender = readlnOrNull()
+    val gender = readlnOrNullGender()
     println("Nhập địa chỉ founder:")
     val address = readlnOrNull()
     println("Nhập số điện thoại founder:")
@@ -357,7 +330,7 @@ fun createFounder(): Founder {
     val vision = readlnOrNull()
     
     return Founder(
-        name, birthOfDate, gender.toGender(), address, phone, email,
+        name, birthOfDate, gender, address, phone, email,
         companyName, vision
     )
 }

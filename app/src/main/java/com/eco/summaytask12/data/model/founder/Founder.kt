@@ -1,4 +1,7 @@
-package com.eco.summaytask12.data.model
+package com.eco.summaytask12.data.model.founder
+
+import com.eco.summaytask12.data.model.person.Gender
+import com.eco.summaytask12.data.model.person.Person
 
 class Founder(
     name: String,

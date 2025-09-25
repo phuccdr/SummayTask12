@@ -1,4 +1,8 @@
-package com.eco.summaytask12.data.model
+package com.eco.summaytask12.data.model.student
+
+import com.eco.summaytask12.data.model.employee.android_developer.KotlinExercise
+import com.eco.summaytask12.data.model.person.Gender
+import com.eco.summaytask12.data.model.person.Person
 
 open class Student(
     name: String,
@@ -7,12 +11,12 @@ open class Student(
     address: String,
     phone: String,
     email: String,
-    var university: String? = "",
+    private var university: String? = "",
     private var major: String? = "",
     private var GPA: Float = 0f,
     private var skills: HashSet<String> = hashSetOf()
 ) : Person(name, birthOfDate, gender, address, phone, email), KotlinExercise {
-    val typeDegree: DegreeType?
+    private val typeDegree: DegreeType?
         get() = when (GPA) {
             in 1.0..2.49 -> DegreeType.AVERAGE
             in 2.5..3.19 -> DegreeType.GOOD

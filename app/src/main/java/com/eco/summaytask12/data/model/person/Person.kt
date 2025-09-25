@@ -1,4 +1,4 @@
-package com.eco.summaytask12.data.model
+package com.eco.summaytask12.data.model.person
 
 import com.eco.summaytask12.extension.normalizeUserName
 import com.eco.summaytask12.extension.stringToDate
@@ -22,14 +22,15 @@ abstract class Person(
         email: String
     ) : this(name.normalizeUserName(), birthOfDate.stringToDate(), gender, address, phone, email)
 
-    val contactInfo: String by lazy {
-        """
+    val contactInfo: String
+        get() {
+            return """
     $name's Contact Information:
     Email: $email
     Phone: $phone
     Address: $address
 """.trimIndent()
-    }
+        }
     val age: Int
         get() {
             val currentTime = Calendar.getInstance()
