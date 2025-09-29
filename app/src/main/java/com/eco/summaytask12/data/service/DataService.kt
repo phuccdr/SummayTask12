@@ -39,3 +39,4 @@ class DataService {
     
     fun checkContainStudent2(student: Student): Boolean = studentRepository.checkContainStudent2(student)
 }
+

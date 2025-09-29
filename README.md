@@ -121,7 +121,7 @@ Các hàm helper:
 - readlnOrNullDouble(): Validate số thực
 - readlnOrNullFloat(): Validate số float
 
-![Sơ đồ hệ thống](hinh1.png)
+![Sơ đồ hệ thống](img.png)
 
 ## Tác giả
 
