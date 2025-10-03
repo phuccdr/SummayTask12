@@ -1,10 +1,14 @@
-package com.eco.summaytask12.data.model.employee.androiddeveloper
+package com.eco.summaytask12.data.model.employee.dev.androiddeveloper
 
 import com.eco.summaytask12.data.model.department.Department
 import com.eco.summaytask12.data.model.employee.Employee
+import com.eco.summaytask12.data.model.employee.dev.BaseDev
+import com.eco.summaytask12.data.model.employee.dev.DeveloperLevel
+import com.eco.summaytask12.data.model.employee.dev.exercise.JavaExercise
+import com.eco.summaytask12.data.model.employee.dev.exercise.KotlinExercise
 import com.eco.summaytask12.data.model.person.Gender
 
-class AndroidDeveloper(
+open class AndroidDeveloper(
     name: String,
     birthOfDate: String,
     gender: Gender,
@@ -12,9 +16,9 @@ class AndroidDeveloper(
     phone: String,
     email: String,
     department: Department,
-    var experience: Double,
-    var skills: HashSet<String>,
-) : Employee(name, birthOfDate, gender, address, phone, email, department), KotlinExercise {
+    experience: Double,
+    techSkills: MutableSet<String> = mutableSetOf()
+) : BaseDev(name, birthOfDate, gender, address, phone, email, department, experience, techSkills),KotlinExercise,JavaExercise {
     val level: DeveloperLevel
         get() = when {
             experience < 0.5 -> DeveloperLevel.INTERN
@@ -31,11 +35,6 @@ class AndroidDeveloper(
         this.experience = newExperience
     }
 
-    override fun studyKotlin() {
-        skills.add("Kotlin")
-        skills.add("Collections")
-    }
-
     override fun startWork() {
         println("Android Developer $name is coding app")
     }
@@ -44,8 +43,17 @@ class AndroidDeveloper(
         println("Android Developer $name finished app")
     }
 
-    override fun toString(): String {
-        return "AndroidDeveloper(name='$name', birthOfDate='$birthOfDate', gender=$gender, address='$address', phone='$phone', email='$email', department='$department', experience=$experience, skills=$skills)"
+    override fun studyKotlin() {
+        TODO("Not yet implemented")
     }
+
+    override fun studyJava() {
+        TODO("Not yet implemented")
+    }
+
+    override fun toString(): String {
+        return "AndroidDeveloper(name='$name', birthOfDate='$birthOfDate', gender=$gender, address='$address', phone='$phone', email='$email', department='$department', experience=$experience, skills=$techSkills)"
+    }
+
 
 }

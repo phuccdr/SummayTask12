@@ -2,10 +2,10 @@ package com.eco.summaytask12
 
 import com.eco.summaytask12.data.model.department.Department
 import com.eco.summaytask12.data.service.DataService
-import com.eco.summaytask12.data.model.employee.androiddeveloper.AndroidDeveloper
+import com.eco.summaytask12.data.model.employee.dev.androiddeveloper.AndroidDeveloper
 import com.eco.summaytask12.data.model.employee.Employee
 import com.eco.summaytask12.data.model.person.Gender
-import com.eco.summaytask12.data.model.student.Student
+import com.eco.summaytask12.data.model.employee.dev.androiddeveloper.internandroid.InternAndroidDeveloper
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
@@ -102,7 +102,7 @@ fun checkPerformanceAddStudent() {
     }
     println("TimeSearchStudent2:$timeSearchStudent2")
 
-    val studentCheckContain = Student(
+    val studentCheckContain = InternAndroidDeveloper(
         "Thai Phuc",
         "20/09/2004",
         Gender.MALE,
@@ -124,11 +124,11 @@ fun checkPerformanceAddStudent() {
     println("TimeCheckContainStudent2:$timeCheckContainStudent2")
 }
 
-fun createListStudents(): List<Student> {
-    val students = mutableListOf<Student>()
+fun createListStudents(): List<InternAndroidDeveloper> {
+    val students = mutableListOf<InternAndroidDeveloper>()
     for (i in 0..1000) {
         students.add(
-            Student(
+            InternAndroidDeveloper(
                 "Student $i",
                 "18/09/2025",
                 Gender.MALE,

@@ -4,7 +4,7 @@ import com.eco.summaytask12.data.model.employee.Employee
 import com.eco.summaytask12.data.model.founder.Founder
 import java.util.Calendar
 
-data class Company(
+class Company(
     val name: String,
     val address: String,
     val founder: Founder,
@@ -33,7 +33,6 @@ data class Company(
     override fun toString(): String {
         return "Company(name='$name', address='$address', founder=$founder, employees=$employees, description=$description, foundedYear=$foundedYear), totalEmployees=$totalEmployees"
     }
-
 
     fun addEmployees(employees: List<Employee>) {
         this.employees.addAll(employees)

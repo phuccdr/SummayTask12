@@ -1,10 +1,11 @@
-package com.eco.summaytask12.data.model.student
+package com.eco.summaytask12.data.model.employee.dev.androiddeveloper.internandroid
 
-import com.eco.summaytask12.data.model.employee.androiddeveloper.KotlinExercise
+import com.eco.summaytask12.data.model.department.Department
+import com.eco.summaytask12.data.model.employee.dev.androiddeveloper.AndroidDeveloper
+import com.eco.summaytask12.data.model.employee.dev.exercise.KotlinExercise
 import com.eco.summaytask12.data.model.person.Gender
-import com.eco.summaytask12.data.model.person.Person
 
-open class Student(
+open class InternAndroidDeveloper(
     name: String,
     birthOfDate: String,
     gender: Gender,
@@ -14,8 +15,10 @@ open class Student(
     private var university: String? = "",
     private var major: String? = "",
     private var GPA: Float = 0f,
-    private var skills: HashSet<String> = hashSetOf()
-) : Person(name, birthOfDate, gender, address, phone, email), KotlinExercise {
+    department: Department,
+    experience: Double
+) : AndroidDeveloper(name, birthOfDate, gender, address, phone, email, department, experience),
+    KotlinExercise {
     private val typeDegree: DegreeType?
         get() = when (GPA) {
             in 1.0..2.49 -> DegreeType.AVERAGE

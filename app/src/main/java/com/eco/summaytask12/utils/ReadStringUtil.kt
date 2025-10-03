@@ -55,7 +55,6 @@ fun readlnOrNullDate(): String {
 fun readlnOrNullDepartment(): Department {
     val input = com.eco.summaytask12.readlnOrNull()
     when {
-        input.equals("HumanResources", ignoreCase = true) -> return Department.HumanResources
         input.equals("Product", ignoreCase = true) -> return Department.Product
         input.equals("Outsource", ignoreCase = true) -> return Department.Outsource
         else -> {

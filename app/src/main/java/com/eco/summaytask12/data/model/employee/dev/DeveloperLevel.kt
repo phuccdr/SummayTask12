@@ -1,4 +1,4 @@
-package com.eco.summaytask12.data.model.employee.androiddeveloper
+package com.eco.summaytask12.data.model.employee.dev
 
 enum class DeveloperLevel {
         INTERN,

@@ -2,7 +2,7 @@ package com.eco.summaytask12.data.mock
 
 import com.eco.summaytask12.data.model.department.Department
 import com.eco.summaytask12.data.model.employee.Employee
-import com.eco.summaytask12.data.model.employee.androiddeveloper.AndroidDeveloper
+import com.eco.summaytask12.data.model.employee.dev.androiddeveloper.AndroidDeveloper
 import com.eco.summaytask12.data.model.employee.manger.Manager
 import com.eco.summaytask12.data.model.person.Gender
 
@@ -15,7 +15,7 @@ object MockEmployeeData {
             "Thanh Xuan, Ha Noi",
             "0345678901",
             "hoa.nguyen@ecomobile.com",
-            Department.HumanResources,
+            Department.Outsource,
         ),
         Employee(
             "Nam Tran",
@@ -65,6 +65,7 @@ object MockEmployeeData {
             Department.Product,
             MockProject.projects,
         ),
+
     )
     val mockAndroidDevelopers: List<AndroidDeveloper>
         get() = mockEmployees.filterIsInstance<AndroidDeveloper>()

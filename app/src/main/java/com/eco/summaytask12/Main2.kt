@@ -3,9 +3,9 @@ package com.eco.summaytask12
 import com.eco.summaytask12.data.model.company.Company
 import com.eco.summaytask12.data.service.DataService
 import com.eco.summaytask12.extension.toGender
-import com.eco.summaytask12.data.model.employee.androiddeveloper.AndroidDeveloper
+import com.eco.summaytask12.data.model.employee.dev.androiddeveloper.AndroidDeveloper
 import com.eco.summaytask12.data.model.employee.Employee
-import com.eco.summaytask12.data.model.student.Student
+import com.eco.summaytask12.data.model.employee.dev.androiddeveloper.internandroid.InternAndroidDeveloper
 import com.eco.summaytask12.data.model.founder.Founder
 import com.eco.summaytask12.utils.readlnOrNullDate
 import com.eco.summaytask12.utils.readlnOrNullDepartment
@@ -280,7 +280,7 @@ fun readlnOrNull(): String {
 
 
 
-fun createStudent(): Student {
+fun createStudent(): InternAndroidDeveloper {
     println("------------- Nhập thông tin sinh viên -------------------")
     println("Nhập tên sinh viên:")
     val name = readlnOrNull()
@@ -304,7 +304,7 @@ fun createStudent(): Student {
     val skillsInput = readlnOrNull()
     val skills = skillsInput.split(",").map { it.trim() }.toHashSet()
     
-    return Student(
+    return InternAndroidDeveloper(
         name, birthOfDate, gender, address, phone, email,
         university, major, gpa, skills
     )

@@ -2,8 +2,8 @@ package com.eco.summaytask12.data.repository
 
 import com.eco.summaytask12.data.mock.MockEmployeeData
 import com.eco.summaytask12.data.model.employee.Employee
-import com.eco.summaytask12.data.model.employee.androiddeveloper.AndroidDeveloper
-import com.eco.summaytask12.data.model.employee.androiddeveloper.DeveloperLevel
+import com.eco.summaytask12.data.model.employee.dev.androiddeveloper.AndroidDeveloper
+import com.eco.summaytask12.data.model.employee.dev.DeveloperLevel
 import com.eco.summaytask12.data.model.employee.manger.Manager
 import kotlinx.coroutines.delay
 

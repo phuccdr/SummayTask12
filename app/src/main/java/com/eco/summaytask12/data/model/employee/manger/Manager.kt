@@ -19,6 +19,10 @@ class Manager(
         projects.add(project)
     }
 
+    fun addProjects(projects: List<Project>) {
+        this.projects.addAll(projects)
+    }
+
     fun checkProjectProcess(): Map<String, List<Project>> {
         return projects.groupBy { project ->
             if (project.isCompleted) "Completed" else "Not Completed"
