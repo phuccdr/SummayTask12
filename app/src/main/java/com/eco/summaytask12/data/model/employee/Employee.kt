@@ -1,12 +1,12 @@
 package com.eco.summaytask12.data.model.employee
 
-import com.eco.summaytask12.data.model.department.Department
 import com.eco.summaytask12.data.model.person.Gender
 import com.eco.summaytask12.data.model.person.Person
+import java.util.Date
 
 open class Employee(
     name: String,
-    birthOfDate: String,
+    birthOfDate: Date,
     gender: Gender,
     address: String,
     phone: String,

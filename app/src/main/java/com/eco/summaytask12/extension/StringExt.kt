@@ -1,5 +1,6 @@
 package com.eco.summaytask12.extension
 
+import com.eco.summaytask12.Constant
 import com.eco.summaytask12.data.model.person.Gender
 import java.text.SimpleDateFormat
 import java.util.Date
@@ -33,7 +34,7 @@ fun String.normalizeUserName(): String {
 fun String.toGender(): Gender = when {
     this.contains("Nam", ignoreCase = true) -> Gender.MALE
     this.contains("Nu", ignoreCase = true) -> Gender.FEMALE
-    else -> throw IllegalArgumentException("Invalid gender value: $this")
+    else -> throw Exception(Constant.PLEASE_ENTER_MALE_OR_FEMALE)
 }
 
 /**

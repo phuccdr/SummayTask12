@@ -1,130 +1,128 @@
-# SummayTask12 
+# SummayTask12 - Employee & Project Management System
 
-Dự án tổng hợp kiến thức task 1 và task 2, tập trung vào việc học và thực hành lập trình Kotlin với các khái niệm về OOP, Coroutines và quản lý dữ liệu. Dự án bao gồm cả ứng dụng Android cơ bản và các chương trình console để thực hành.
+## Mô tả ngắn gọn
 
-## Tính năng chính
+**SummayTask12** là một ứng dụng Android được viết bằng Kotlin, cung cấp hệ thống quản lý nhân viên
+và dự án cho doanh nghiệp. Ứng dụng sử dụng giao diện console để tương tác với người dùng và quản lý
+các loại nhân viên khác nhau bao gồm Android Developer, Backend Developer, Manager và ShareHolder.
 
-### Quản lý đối tượng Person và các lớp con
-- Thêm và quản lý nhân viên
-- Thêm và quản lý Android Developer với level tự động (Intern, Fresher, Junior, Senior)
-- Thêm và quản lý sinh viên với thông tin GPA và xếp loại học lực
-- Tạo công ty startup với thông tin founder
+## Chức năng chính
 
-### Chức năng tìm kiếm và thống kê
-- Tìm kiếm nhân viên theo tên
-- Lọc nhân viên theo phòng ban  
-- Thống kê tổng số nhân viên, Android developer
-- Hiển thị danh sách Android developer theo level
+### 1. **Quản lý nhân viên**
 
-### Demo hiệu năng và Coroutines
-- So sánh hiệu năng giữa MutableSet và HashSet
-- Thực hành Kotlin Coroutines với async/await
-- Đo thời gian thực thi các thao tác khác nhau
+- Thêm, sửa, xóa thông tin nhân viên
+- Quản lý các loại nhân viên: Android Developer, Backend Developer, Manager, Intern, ShareHolder
+- Phân cấp kỹ năng developer: Intern, Fresher, Junior, Senior (dựa trên kinh nghiệm)
+- Quản lý thông tin cá nhân: tên, ngày sinh, giới tính, địa chỉ, số điện thoại, email
 
-## Công nghệ sử dụng
+### 2. **Quản lý dự án**
 
-- Kotlin 1.9.24
-- Android SDK API 28+
-- Kotlin Coroutines
-- Gradle build system
+- Tạo mới và theo dõi tiến độ dự án
+- Xác định trạng thái dự án: Not Started, In Progress, Completed
+- Thống kê và báo cáo tổng quan
 
-## Cấu trúc dự án
+### 3. **Hệ thống Menu Console**
+
+- Menu tương tác qua console
+- Điều hướng giữa các màn hình khác nhau
+- Chức năng quay lại và thoát chương trình
+
+### 4. **Báo cáo và thống kê**
+
+- Báo cáo tổng quan về nhân viên và dự án
+- Thống kê phân loại nhân viên theo department
+- Theo dõi tiến độ dự án
+
+## Sơ đồ các class chính trong repo
+
+![Sơ đồ các class chính](img.png)
+
+## Cấu trúc thư mục
 
 ```
 app/src/main/java/com/eco/summaytask12/
-├── data/
-│   ├── DataRepository.kt          # Quản lý dữ liệu mock
-│   └── model/                     # Các class model
-│       ├── Person.kt              # Base class
-│       ├── Employee.kt            # Kế thừa Person
-│       ├── AndroidDeveloper.kt    # Kế thừa Employee
-│       ├── Student.kt             # Kế thừa Person
-│       ├── Company.kt             # Quản lý công ty
-│       ├── Founder.kt             # Kế thừa Person
-│       └── các enum (Gender, DeveloperLevel, DegreeType)
-├── extension/
-│   └── StringExt.kt               # Extension cho String
-├── MainActivity.kt                # Activity Android cơ bản
-├── Main1.kt                       # Demo coroutines và performance test
-└── Main2.kt                       # Console app với menu
+├── data/                           # Lớp dữ liệu
+│   ├── mock/                      # Dữ liệu giả lập
+│   │   ├── MockEmployeeData.kt    # Mock data cho nhân viên
+│   │   └── MockProjectData.kt     # Mock data cho dự án
+│   ├── model/                     # Các model class
+│   │   ├── androiddeveloper/      
+│   │   │   └── AndroidDeveloper.kt # Class Android Developer
+│   │   ├── backenddeveloper/      
+│   │   │   └── BackendDeveloper.kt # Class Backend Developer
+│   │   ├── dev/                   # Base developer classes
+│   │   │   ├── BaseDev.kt         # Class cơ sở cho Developer
+│   │   │   ├── DeveloperLevel.kt  # Enum cấp độ Developer
+│   │   │   └── exercise/          # Interfaces cho exercises
+│   │   ├── employee/              # Employee models
+│   │   │   ├── Employee.kt        # Class cơ sở Employee
+│   │   │   ├── Department.kt      # Enum phòng ban
+│   │   │   └── Workable.kt        # Interface cho công việc
+│   │   ├── internandroid/         
+│   │   │   ├── InternAndroidDeveloper.kt # Class Intern Android Dev
+│   │   │   └── DegreeType.kt      # Enum loại bằng cấp
+│   │   ├── manger/                
+│   │   │   └── Manager.kt         # Class Manager
+│   │   ├── person/                
+│   │   │   ├── Person.kt          # Class cơ sở Person
+│   │   │   └── Gender.kt          # Enum giới tính
+│   │   ├── project/               
+│   │   │   ├── Project.kt         # Class dự án
+│   │   │   └── StatusProject.kt   # Enum trạng thái dự án
+│   │   └── shareholder/           
+│   │       └── ShareHolder.kt     # Class cổ đông
+│   ├── repository/                # Repository pattern
+│   │   ├── EmployeeRepository.kt  # Repository cho nhân viên
+│   │   └── ProjectRepository.kt   # Repository cho dự án
+│   └── service/                   # Business logic services
+│       ├── CreateEmployeeService.kt # Service tạo nhân viên
+│       ├── CreateProjectService.kt  # Service tạo dự án
+│       └── DataService.kt         # Service quản lý data
+├── extension/                     # Extension functions
+│   └── StringExt.kt              # Extensions cho String
+├── menu/                         # Hệ thống menu
+│   ├── screen/                   # Các màn hình
+│   │   ├── AddEmployeeScreen.kt  # Màn hình thêm nhân viên
+│   │   ├── EmployeeManagementScreen.kt # Quản lý nhân viên
+│   │   ├── MainScreen.kt         # Màn hình chính
+│   │   ├── ProjectManagementScreen.kt # Quản lý dự án
+│   │   └── StaticOverviewScreen.kt # Báo cáo tổng quan
+│   ├── BackStack.kt              # Quản lý navigation
+│   ├── MenuAction.kt             # Actions cho menu
+│   ├── MenuItem.kt               # Item của menu
+│   ├── MenuResult.kt             # Result sau action
+│   └── Screen.kt                 # Base screen class
+├── utils/                        # Utilities
+│   ├── InputHandlerUtil.kt       # Xử lý input
+│   └── LoggerUtil.kt             # Logging utilities
+├── MainActivity.kt               # Main Activity Android
+├── Main.kt                       # Entry point cho console app
+└── Const.kt                      # Constants
 ```
 
-## Hướng dẫn chạy
+## Các kiến thức áp dụng
 
-### Yêu cầu
-- Android Studio
-- JDK 11+
-- Android SDK API 28+
+- **Kotlin**: Ngôn ngữ chính cho Android development
+- **Lập trình hướng đối tượng (OOP)**
+- **Inheritance**: Phân cấp class Person → Employee → Developer types
+- **Polymorphism**: Override methods trong các subclass
+- **Encapsulation**: Private/protected properties và public methods
+- **Abstraction**: Abstract classes và interfaces
+- **Interface Implementation**: Workable, DevExercise, JavaExercise, KotlinExercise
+- **Data Classes**: Sử dụng cho Project model
+- **Sealed Classes/Enums**: Department, Gender, DeveloperLevel, StatusProject
+- **Extension Functions**: StringExt.kt
+- **Companion Objects**: Factory methods trong Project
+- **Nullable Types**: Safe null handling
+- **Collections**: MutableSet, MutableList cho quản lý data
+- **When Expressions**: Logic phân cấp developer level
 
-### Cài đặt
-1. Mở project trong Android Studio
-2. Sync Gradle
-3. Chạy Main1.kt hoặc Main2.kt để test console application
-4. Chạy ứng dụng Android để xem MainActivity
+## Mục tiêu học tập
 
-## Cách sử dụng
+Project co tac dụng:
 
-### Console Application (Main2.kt)
-Chạy file Main2.kt để truy cập menu:
+- Trả lời được câu hỏi lâp trình hướng đối tượng là gì ?
+- Tư duy xác được các đối tượng trong lập trình, đưa các đối tượng vào lập trình.
+- Triển khai hướng đối tượng trong lâp trình.
 
-```
-Nhập 1 để thực hiện thêm nhân viên
-Nhập 2 để thực hiện tìm kiếm nhân viên theo tên  
-Nhập 3 để thực hiện in ra danh sách thông tin nhân viên
-Nhập 4 để thực hiện in ra danh sách nhân viên theo phòng ban
-Nhập 5 để thực hiện in ra thống kê báo cáo nhân viên
-Nhập 6 để thực hiện in ra danh sách thông tin Android dev theo level
-Nhập 7 để thực hiện thêm Android developer
-Nhập 8 để thực hiện tạo sinh viên và thêm sinh viên vào danh sách
-Nhập 9 để thực hiện tạo company và thêm company vào cơ sở dữ liệu
-Nhập 0 để quay lại
-```
-
-### Performance Demo (Main1.kt)
-Chạy file Main1.kt để xem demo:
-- Sử dụng Kotlin Coroutines với async/await
-- So sánh hiệu năng MutableSet vs HashSet
-- Đo thời gian tìm kiếm và thêm dữ liệu với 100,000+ records
-
-## Kiến trúc và patterns sử dụng
-
-### Object-Oriented Programming
-Dự án sử dụng inheritance hierarchy:
-```
-Person (base class)
-├── Employee
-│   └── AndroidDeveloper
-├── Student  
-└── Founder
-```
-
-### Repository Pattern
-DataRepository quản lý dữ liệu mock và các thao tác CRUD cơ bản.
-
-### Kotlin Features
-- Extension functions: StringExt.kt cho việc convert string sang enum
-- Data classes: Company, các enum classes
-- Coroutines: async/await cho xử lý bất đồng bộ
-- Collections: So sánh MutableSet vs HashSet
-
-## Các tính năng học tập
-
-### Performance Testing
-- So sánh MutableSet vs HashSet với 100,000+ records
-- Đo thời gian addStudent1() vs addStudent2()
-- Test searchStudent1() vs searchStudent2()
-- Kiểm tra hiệu năng checkContainStudent1() vs checkContainStudent2()
-
-### Input Validation
-Các hàm helper:
-- readlnOrNull(): Không cho phép input rỗng
-- readlnOrNullDouble(): Validate số thực
-- readlnOrNullFloat(): Validate số float
-
-![Sơ đồ hệ thống](img.png)
-
-## Tác giả
-
-Dự án học tập về Kotlin và Android Development
-Email: phucth.ecomobile@gmail.com
 

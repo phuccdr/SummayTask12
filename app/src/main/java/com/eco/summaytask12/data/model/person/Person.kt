@@ -13,24 +13,15 @@ abstract class Person(
     var phone: String,
     var email: String
 ) {
-    constructor(
-        name: String,
-        birthOfDate: String,
-        gender: Gender,
-        address: String,
-        phone: String,
-        email: String
-    ) : this(name.normalizeUserName(), birthOfDate.stringToDate(), gender, address, phone, email)
-
-    val contactInfo: String
-        get() {
-            return """
+    open fun getContactInfo(): String {
+        return """
     $name's Contact Information:
     Email: $email
     Phone: $phone
     Address: $address
 """.trimIndent()
-        }
+    }
+
     val age: Int
         get() {
             val currentTime = Calendar.getInstance()
