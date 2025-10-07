@@ -20,7 +20,6 @@ class DataService {
 
     fun addEmployee(employee: Employee) = employeeRepository.addEmployees(employee)
 
-
     fun searchEmployeeByName(name: String): Employee? =
         employeeRepository.searchEmployeeByName(name)
 
@@ -64,14 +63,8 @@ class DataService {
     fun getDeviceStatistics() = deviceRepository.getStatistics()
     fun searchDevicesByName(deviceName: String) = deviceRepository.searchDevicesByName(deviceName)
     fun getAllDevices() = deviceRepository.getAllDevices()
-    fun deleteDevice(deviceName: String): String {
-        val result = deviceRepository.removeDevice(deviceName)
-        return if (result) {
-            "Đã xóa thiết bị '$deviceName' thành công!"
-        } else {
-            "Không tìm thấy thiết bị '$deviceName' để xóa."
-        }
-    }
+    fun deleteDevice(deviceName: String) = deviceRepository.removeDevice(deviceName)
+
 
 
 }

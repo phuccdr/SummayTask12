@@ -15,12 +15,15 @@ class DeviceManagementScreen : Screen() {
         menu.add(deviceStatisticsMenuItem)
         deviceStatisticsMenuItem.onClick = {
             val statistics = dataService.getDeviceStatistics()
-            outputHandler.printlnStatistic(statistics)
-        }
+            outputHandler.run {
+                printlnStatistic(statistics)
+                printSuccess()
+            }
+            }
 
         menu.add(searchDeviceByNameMenuItem)
         searchDeviceByNameMenuItem.onClick = {
-            outputHandler.print("Nhập tên thiết bị cần tìm: ")
+            outputHandler.print("Nhap ten thiet bi can tim: ")
             val deviceName = inputHandler.readString()
             val devices = dataService.searchDevicesByName(deviceName)
             if (devices.isNotEmpty()) {
@@ -28,8 +31,9 @@ class DeviceManagementScreen : Screen() {
                 devices.forEach { device ->
                     outputHandler.print(device.toString())
                 }
+                outputHandler.printSuccess()
             } else {
-                outputHandler.print("Không tìm thấy thiết bị với tên: $deviceName")
+                outputHandler.print("Khong tim thay thiet bi voi ten: $deviceName")
             }
         }
 
@@ -37,33 +41,33 @@ class DeviceManagementScreen : Screen() {
         deleteDeviceMenuItem.onClick = onClick@{
             val devices = dataService.getAllDevices()
             if (devices.isEmpty()) {
-                outputHandler.print("Không có thiết bị nào để xóa.")
+                outputHandler.print("Khong co thiet bi nao de xoa.")
                 return@onClick
             }
 
-            outputHandler.print("=== DANH SÁCH THIẾT BỊ ===")
+            outputHandler.print("=== DANH SACH THIET BI ===")
             outputHandler.printlnList(devices)
 
-            outputHandler.print("Nhập số thứ tự thiết bị cần xóa (1-${devices.size}): ")
+            outputHandler.print("Nhap so thu tu thiet bi can xoa (1-${devices.size}): ")
             val indexInput = inputHandler.readInt()
 
             try {
                 val selectedIndex = indexInput - 1
                 if (selectedIndex in 0 until devices.size) {
                     val selectedDevice = devices[selectedIndex]
-                    outputHandler.print("Bạn có chắc chắn muốn xóa thiết bị '${selectedDevice.deviceName}'? (Y/N): ")
+                    outputHandler.print("Ban co chac chan muon xoa thiet bi '${selectedDevice.deviceName}'? (Y/N): ")
                     val confirmation = inputHandler.readString()
                     if (confirmation.uppercase() == "Y" || confirmation.uppercase() == "YES") {
-                        val result = dataService.deleteDevice(selectedDevice.deviceName)
-                        outputHandler.print(result)
+                        dataService.deleteDevice(selectedDevice.deviceName)
+                        outputHandler.printSuccess()
                     } else {
-                        outputHandler.print("Đã hủy việc xóa thiết bị")
+                        outputHandler.print("Da huy viec xoa thiet bi")
                     }
                 } else {
-                    outputHandler.print("Số thứ tự không hợp lệ. Vui lòng chọn từ 1 đến ${devices.size}")
+                    outputHandler.print("So thu tu khong hop le. Vui long chon tu 1 den ${devices.size}")
                 }
             } catch (e: NumberFormatException) {
-                outputHandler.print("Vui lòng nhập một số hợp lệ.")
+                outputHandler.print("Vui long nhap mot so hop le.")
             }
         }
     }
