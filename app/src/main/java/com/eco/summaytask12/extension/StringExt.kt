@@ -1,7 +1,7 @@
 package com.eco.summaytask12.extension
 
-import com.eco.summaytask12.Constant
-import com.eco.summaytask12.data.model.person.Gender
+import com.eco.summaytask12.model.person.Gender
+import com.eco.summaytask12.utils.Constant
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale

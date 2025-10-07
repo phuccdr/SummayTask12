@@ -1,7 +1,8 @@
 package com.eco.summaytask12
 
-import com.eco.summaytask12.menu.screen.mainScreen
+import com.eco.summaytask12.menu.screen.main.MainScreen
 
 fun main() {
-    mainScreen.handle()
+    val mainScreen = MainScreen()
+    mainScreen.handler()
 }

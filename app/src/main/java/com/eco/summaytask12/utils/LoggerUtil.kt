@@ -5,9 +5,10 @@ package com.eco.summaytask12.utils
  */
 object LoggerUtil {
     fun d(tag: String = "", message: String) {
-        if(tag.isBlank()){
-        println("$message")}else{
-            println("$tag:\n$message")
+        if (tag.isBlank()) {
+            println("$message")
+        } else {
+            println("$tag: $message")
         }
     }
 

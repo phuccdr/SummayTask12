@@ -1,0 +1,33 @@
+package com.eco.summaytask12.model.person
+
+import java.util.Calendar
+import java.util.Date
+
+abstract class Person(
+    var name: String,
+    var birthOfDate: Date,
+    var gender: Gender,
+    var address: String,
+    var phone: String,
+    var email: String
+) {
+    open fun getContactInfo(): String {
+        return """
+    $name's Contact Information:
+    Email: $email
+    Phone: $phone
+    Address: $address
+""".trimIndent()
+    }
+
+    val age: Int
+        get() {
+            val currentTime = Calendar.getInstance()
+            val birthCalendar = Calendar.getInstance().apply { time = birthOfDate }
+            return currentTime.get(Calendar.YEAR) - birthCalendar.get(Calendar.YEAR)
+        }
+
+    abstract fun greet()
+    abstract fun run()
+    abstract fun walk()
+}

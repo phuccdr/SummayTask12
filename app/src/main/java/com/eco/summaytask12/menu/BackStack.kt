@@ -1,6 +1,7 @@
 package com.eco.summaytask12.menu
 
 import kotlin.system.exitProcess
+import com.eco.summaytask12.model.screen.Screen
 
 /**
  * Object dai dien cho stack chua cac screen ma nguoi dung dang su dung
@@ -18,8 +19,10 @@ object BackStack {
             exitProcess(0)
         }
     }
+
     fun size() = stack.size
     fun clear() = stack.clear()
+    fun last() = stack.last()
 
 
 }
