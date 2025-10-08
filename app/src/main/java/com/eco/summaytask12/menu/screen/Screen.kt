@@ -1,12 +1,12 @@
-package com.eco.summaytask12.model.screen
+package com.eco.summaytask12.menu.screen
 
 import com.eco.summaytask12.handler.InputHandler
 import com.eco.summaytask12.handler.OutputHandler
 import com.eco.summaytask12.menu.BackStack
-import com.eco.summaytask12.model.menuitem.MenuItem
+import com.eco.summaytask12.menu.menuitem.MenuItem
 import kotlin.system.exitProcess
 
-abstract class Screen() {
+abstract class Screen{
     protected val menu: MutableList<MenuItem> = mutableListOf()
     protected var name: String = "Screen"
     protected val inputHandler: InputHandler = InputHandler()

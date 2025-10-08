@@ -1,7 +1,7 @@
 package com.eco.summaytask12.menu.screen.addemployee
 
-import com.eco.summaytask12.model.menuitem.MenuItem
-import com.eco.summaytask12.model.screen.Screen
+import com.eco.summaytask12.menu.menuitem.MenuItem
+import com.eco.summaytask12.menu.screen.Screen
 import com.eco.summaytask12.services.DataService
 import com.eco.summaytask12.handler.InputHandler
 import com.eco.summaytask12.utils.CreateEmployeeUtil

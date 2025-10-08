@@ -1,9 +1,9 @@
-package com.eco.summaytask12.model.menuitem
+package com.eco.summaytask12.menu.menuitem
 
 open class MenuItem(
     val action: String,
 ) {
-    var onClick: (() -> Unit) = {}
+    var onClick: (() -> Unit)={}
 
     /**
      * La cac lua chon cua nguoi dung
@@ -11,6 +11,4 @@ open class MenuItem(
     fun onSelected() {
         onClick.invoke()
     }
-
-
 }

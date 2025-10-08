@@ -28,14 +28,6 @@ abstract class BaseDev(
             }
         }
 
-    fun addSkill(skill: String) {
-        techSkills.add(skill)
-    }
-
-    fun removeSkill(skill: String) {
-        techSkills.remove(skill)
-    }
-
     override fun study() {
         println("Developer $name is studying new technology")
     }

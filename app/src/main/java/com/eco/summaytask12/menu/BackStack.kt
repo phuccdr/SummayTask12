@@ -1,7 +1,7 @@
 package com.eco.summaytask12.menu
 
 import kotlin.system.exitProcess
-import com.eco.summaytask12.model.screen.Screen
+import com.eco.summaytask12.menu.screen.Screen
 
 /**
  * Object dai dien cho stack chua cac screen ma nguoi dung dang su dung

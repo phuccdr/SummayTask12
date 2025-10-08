@@ -1,6 +1,6 @@
 package com.eco.summaytask12.handler
 
-import com.eco.summaytask12.model.menuitem.MenuItem
+import com.eco.summaytask12.menu.menuitem.MenuItem
 import com.eco.summaytask12.model.androiddeveloper.AndroidDeveloper
 
 class OutputHandler {

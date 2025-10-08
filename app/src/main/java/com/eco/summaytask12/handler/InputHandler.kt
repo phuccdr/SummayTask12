@@ -4,7 +4,7 @@ import com.eco.summaytask12.utils.Constant
 import com.eco.summaytask12.model.employee.Department
 import com.eco.summaytask12.extension.normalizeUserName
 import com.eco.summaytask12.extension.toGender
-import com.eco.summaytask12.model.menuitem.MenuItem
+import com.eco.summaytask12.menu.menuitem.MenuItem
 import com.eco.summaytask12.model.person.Gender
 import com.eco.summaytask12.utils.LoggerUtil
 import java.text.SimpleDateFormat
@@ -12,7 +12,7 @@ import java.util.Date
 import java.util.Locale
 
 /**
- * Object nay xu ly khi du lieu dau vao.
+ * class nay xu ly khi du lieu dau vao.
  * Xu ly cac try catch input throw cac exception de xu ly phia sau.
  */
 class InputHandler {

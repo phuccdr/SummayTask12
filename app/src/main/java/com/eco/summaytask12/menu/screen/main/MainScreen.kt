@@ -3,8 +3,8 @@ package com.eco.summaytask12.menu.screen.main
 import com.eco.summaytask12.menu.screen.devicemanagement.DeviceManagementScreen
 import com.eco.summaytask12.menu.screen.employeemanagement.EmployeeManagementScreen
 import com.eco.summaytask12.menu.screen.projectmanagement.ProjectManagementScreen
-import com.eco.summaytask12.model.menuitem.MenuItem
-import com.eco.summaytask12.model.screen.Screen
+import com.eco.summaytask12.menu.menuitem.MenuItem
+import com.eco.summaytask12.menu.screen.Screen
 import com.eco.summaytask12.menu.screen.statisticoverview.StatisticsOverviewScreen
 
 class MainScreen : Screen() {
