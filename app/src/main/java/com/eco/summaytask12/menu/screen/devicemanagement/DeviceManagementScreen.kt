@@ -1,11 +1,18 @@
 package com.eco.summaytask12.menu.screen.devicemanagement
 
+import com.eco.summaytask12.di.AppModule
 import com.eco.summaytask12.menu.menuitem.MenuItem
 import com.eco.summaytask12.menu.screen.Screen
-import com.eco.summaytask12.services.DataService
+import com.eco.summaytask12.data.services.DataService
 
-class DeviceManagementScreen : Screen() {
-    private val dataService = DataService()
+/**
+ * DeviceManagementScreen - Màn hình quản lý thiết bị
+ * 
+ * Sử dụng Dependency Injection: nhận DataService từ AppModule
+ */
+class DeviceManagementScreen(
+    private val dataService: DataService = AppModule.provideDataService()
+) : Screen() {
     override fun createMenu() {
         menu.add(backMenuItem)
         backMenuItem.onClick = {

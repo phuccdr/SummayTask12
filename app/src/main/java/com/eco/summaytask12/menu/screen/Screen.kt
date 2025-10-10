@@ -1,16 +1,24 @@
 package com.eco.summaytask12.menu.screen
 
-import com.eco.summaytask12.handler.InputHandler
+import com.eco.summaytask12.di.AppModule
+import com.eco.summaytask12.handler.input.InputHandler
 import com.eco.summaytask12.handler.OutputHandler
 import com.eco.summaytask12.menu.BackStack
 import com.eco.summaytask12.menu.menuitem.MenuItem
 import kotlin.system.exitProcess
 
-abstract class Screen{
+/**
+ * Screen - Base class cho tất cả các màn hình
+ * 
+ * Sử dụng Dependency Injection để nhận InputHandler và OutputHandler
+ * từ AppModule thay vì tự tạo instances
+ */
+abstract class Screen(
+    protected val inputHandler: InputHandler = AppModule.provideInputHandler(),
+    protected val outputHandler: OutputHandler = AppModule.provideOutputHandler()
+) {
     protected val menu: MutableList<MenuItem> = mutableListOf()
     protected var name: String = "Screen"
-    protected val inputHandler: InputHandler = InputHandler()
-    protected val outputHandler: OutputHandler = OutputHandler()
     private var isRunning = true
 
     protected abstract fun createMenu()

@@ -1,14 +1,19 @@
 package com.eco.summaytask12.menu.screen.projectmanagement
 
-import com.eco.summaytask12.handler.InputHandler
+import com.eco.summaytask12.di.AppModule
 import com.eco.summaytask12.menu.menuitem.MenuItem
 import com.eco.summaytask12.menu.screen.Screen
-import com.eco.summaytask12.services.DataService
-import com.eco.summaytask12.utils.CreateProjectUtil
+import com.eco.summaytask12.data.services.DataService
+import com.eco.summaytask12.handler.input.InputHandlerProjectExt
 
-class ProjectManagementScreen : Screen() {
-    private val dataService = DataService()
-    private val projectService = CreateProjectUtil(InputHandler())
+/**
+ * ProjectManagementScreen - Màn hình quản lý dự án
+ * Sử dụng Dependency Injection: nhận dependencies từ AppModule
+ */
+class ProjectManagementScreen(
+    private val dataService: DataService = AppModule.provideDataService(),
+    private val projectService: InputHandlerProjectExt = InputHandlerProjectExt(AppModule.provideInputHandler())
+) : Screen() {
     override fun createMenu() {
         menu.add(backMenuItem)
         backMenuItem.onClick = {

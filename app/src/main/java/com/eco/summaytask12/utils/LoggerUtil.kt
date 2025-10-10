@@ -1,7 +1,7 @@
 package com.eco.summaytask12.utils
 
 /**
- * Object nay xu ly in ra log
+ * Object nay xu ly in ra log ở tâng dưới
  */
 object LoggerUtil {
     fun d(tag: String = "", message: String) {

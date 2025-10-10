@@ -1,7 +1,7 @@
 package com.eco.summaytask12.handler
 
 import com.eco.summaytask12.menu.menuitem.MenuItem
-import com.eco.summaytask12.model.androiddeveloper.AndroidDeveloper
+import com.eco.summaytask12.data.model.androiddeveloper.AndroidDeveloper
 
 class OutputHandler {
     private fun printlnLine() {
@@ -18,7 +18,7 @@ class OutputHandler {
         menu.forEachIndexed { index, menuItem ->
             println("${index}. ${menuItem.action}")
         }
-        println("Moi ban chon: (0-${menu.size-1})")
+        println("Moi ban chon: (0-${menu.size - 1})")
     }
 
     fun printlnListAndroidDeveloper(androidDevelopers: List<AndroidDeveloper>) {
@@ -32,16 +32,6 @@ class OutputHandler {
         printlnLine()
         statistics.forEach { (key, value) ->
             println("$key: ${(value)}")
-        }
-    }
-//    fun printlnStatistic(statistics: Map<String, String>) {
-//        statistics.forEach { (key, value) ->
-//            println("$key: ${value}")
-//        }
-//    }
-    fun printlnProjectStatistic(statistics: Map<String, String>) {
-        statistics.forEach { (key, value) ->
-            println("$key:\n$value")
         }
     }
 

@@ -1,12 +1,18 @@
 package com.eco.summaytask12.menu.screen.employeemanagement
 
+import com.eco.summaytask12.di.AppModule
 import com.eco.summaytask12.menu.menuitem.MenuItem
 import com.eco.summaytask12.menu.screen.Screen
 import com.eco.summaytask12.menu.screen.addemployee.AddEmployeeScreen
-import com.eco.summaytask12.services.DataService
+import com.eco.summaytask12.data.services.DataService
 
-class EmployeeManagementScreen : Screen() {
-    private val dataService = DataService()
+/**
+ * EmployeeManagementScreen - Màn hình quản lý nhân viên
+ * Sử dụng Dependency Injection: nhận DataService từ AppModule
+ */
+class EmployeeManagementScreen(
+    private val dataService: DataService = AppModule.provideDataService()
+) : Screen() {
     override fun createMenu() {
         menu.add(backMenuItem)
         backMenuItem.onClick = {
